@@ -1,0 +1,12 @@
+{
+  "name": "arun_recipe",
+  "displayName": "arun_recipe",
+  "expo": {
+    "name": "arun_recipe",
+    "slug": "arun_recipe",
+    "version": "1.0.0",
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  }
+}
