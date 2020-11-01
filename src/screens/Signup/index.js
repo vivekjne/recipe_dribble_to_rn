@@ -12,20 +12,25 @@ import images from "../../assets/images";
 import Button from "../../components/shared/Button";
 import { colors, metrics, fonts, commonStyles } from "../../themes";
 import { useColorScheme } from "react-native-appearance";
-import {
-  TouchableOpacity,
-  TouchableWithoutFeedback,
-} from "react-native-gesture-handler";
+import { TouchableWithoutFeedback } from "react-native-gesture-handler";
 
-export default function Login({ navigation }) {
+export default function Signup({ navigation }) {
   const colorScheme = useColorScheme();
   return (
     <KeyboardAvoidingView
+      behavior="padding"
       style={[styles.container, commonStyles[`${colorScheme}Bg`]]}
     >
       <Text style={[styles.loginText, commonStyles[`${colorScheme}Text`]]}>
-        Login
+        Signup
       </Text>
+
+      <TextInput
+        placeholderTextColor={colorScheme === "light" ? "#777" : "#999"}
+        placeholder="Username"
+        keyboardType="default"
+        style={[styles[`${colorScheme}Input`]]}
+      />
       <TextInput
         placeholderTextColor={colorScheme === "light" ? "#777" : "#999"}
         placeholder="Email"
@@ -44,36 +49,22 @@ export default function Login({ navigation }) {
           style={{ position: "absolute", right: 15, top: 16 }}
         />
       </View>
-      <Button title="Login" onPress={() => alert("pressed")} />
+      <Button
+        title="SIGN UP"
+        color={colors.secondary}
+        onPress={() => navigation.navigate("MainTab")}
+      />
 
       <View style={styles.smallTextContainer}>
         <Text style={[styles.smallText, commonStyles[`${colorScheme}Text`]]}>
-          Don't have an account ?
+          Already have an account ?
         </Text>
-        <TouchableWithoutFeedback onPress={() => navigation.navigate("Signup")}>
-          <Text style={[styles.smallText, { color: "#FFC900" }]}> Sign Up</Text>
+        <TouchableWithoutFeedback
+          onPress={() => NavigationPreloadManager.pop()}
+        >
+          <Text style={[styles.smallText, { color: "#FFC900" }]}> Sign in</Text>
         </TouchableWithoutFeedback>
       </View>
-
-      <Text style={styles.orText}>OR</Text>
-      <Button
-        buttonStyles={[styles.socialButton, commonStyles[`${colorScheme}Bg`]]}
-        textStyles={[styles.socialText, commonStyles[`${colorScheme}Text`]]}
-        icon
-        title="Login with Facebook"
-        iconSrc={images.fbLogo}
-        onPress={() => alert("pressed")}
-      />
-
-      <View style={styles.spacer}></View>
-      <Button
-        buttonStyles={[styles.socialButton, commonStyles[`${colorScheme}Bg`]]}
-        textStyles={[styles.socialText, commonStyles[`${colorScheme}Text`]]}
-        icon
-        title="Login with Google"
-        iconSrc={images.googleLogo}
-        onPress={() => alert("pressed")}
-      />
     </KeyboardAvoidingView>
   );
 }
@@ -111,6 +102,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "center",
+    marginTop: 8,
   },
   smallText: {
     fontSize: 10,
